@@ -35,6 +35,37 @@ all coordinated through a LangGraph workflow.
 - Tavily API
 - AviationStack API
 
+## Architecture
+
+TripMate AI follows a multi-agent LangGraph workflow that turns a user travel request into a complete, structured plan. The design is inspired by the project’s Excalidraw architecture diagram and organizes the system into a clear request-processing pipeline.
+
+```mermaid
+flowchart LR
+    U[User Request] --> UI[Web UI<br/>FastAPI + Jinja2]
+    UI --> API[POST /api/travel]
+    API --> G[LangGraph Orchestrator]
+    G --> F[Flight Agent]
+    G --> H[Hotel Agent]
+    G --> I[Itinerary Agent]
+    G --> R[Final Response Agent]
+
+    F --> A[AviationStack API]
+    H --> T[Tavily Search API]
+    I --> L[Groq LLM]
+    R --> O[Polished Travel Plan]
+
+    G --> P[(PostgreSQL Checkpointer)]
+    P --> S[Conversation State Persistence]
+```
+
+### Architecture Highlights
+
+- Frontend Layer: A lightweight FastAPI web app serves the HTML, CSS, JavaScript, and the travel form.
+- Agent Layer: Separate agents handle flight discovery, hotel research, itinerary creation, and final response formatting.
+- Model Layer: Groq-hosted LLMs generate the itinerary and final answer in a natural, structured format.
+- Data Layer: AviationStack provides flight data, Tavily handles web research, and PostgreSQL stores the conversation state using LangGraph checkpoints.
+- Orchestration Layer: LangGraph coordinates the agent sequence and preserves thread-based conversation context across requests.
+
 ## Project Structure
 
 ```text
@@ -112,6 +143,10 @@ curl -X POST http://127.0.0.1:8000/api/travel \
 3. The hotel agent searches for accommodation suggestions.
 4. The itinerary agent creates a practical travel plan.
 5. The final agent formats the result into a polished response.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for the full license text.
 
 ## Contributing
 
