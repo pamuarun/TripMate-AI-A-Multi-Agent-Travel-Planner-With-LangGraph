@@ -21,6 +21,7 @@ function setLoading(isLoading) {
     }
 }
 
+
 function showError(message) {
     const errorBox = document.getElementById("errorBox");
 

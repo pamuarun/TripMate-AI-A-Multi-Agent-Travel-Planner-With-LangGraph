@@ -144,6 +144,7 @@ curl -X POST http://127.0.0.1:8000/api/travel \
 4. The itinerary agent creates a practical travel plan.
 5. The final agent formats the result into a polished response.
 
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for the full license text.

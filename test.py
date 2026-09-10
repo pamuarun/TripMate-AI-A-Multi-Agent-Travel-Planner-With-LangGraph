@@ -16,5 +16,6 @@ response = run_travel_agent(
     thread_id="test_user"
 )
 
+
 print("\nFINAL RESPONSE:\n")
 print(response["answer"])

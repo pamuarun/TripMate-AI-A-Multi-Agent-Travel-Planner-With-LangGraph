@@ -88,9 +88,6 @@ COUNTRY_MAIN_AIRPORT = {
     "ES": "MAD",
 }
 
-
-
-
 CITY_MAIN_AIRPORT = {
     "dhaka": "DAC",
     "delhi": "DEL",
